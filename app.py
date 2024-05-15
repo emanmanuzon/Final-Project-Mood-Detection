@@ -5,3 +5,4 @@ import tensorflow as tf
 st.write("""
 # Mood Detection"""
 )
+file=st.file_uploader("Choose weather photo from computer",type=["jpg","png"])
