@@ -1,6 +1,6 @@
 import streamlit as st
 import tensorflow as tf
-from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
+from streamlit_webrtc import webrtc_streamer, VideoTransformerBase, RTCConfiguration
 import cv2
 import av 
 
