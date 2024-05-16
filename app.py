@@ -16,7 +16,7 @@ class VideoTransformer(VideoTransformerBase):
             # You can pass the detected faces to your model for mood detection here
         return img
 
-@st.cache
+@st.cache_data(experimental_allow_widgets=True)
 def load_model():
     model = tf.keras.models.load_model('CNN_Model_7.h5')
     return model
