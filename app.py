@@ -41,6 +41,7 @@ def import_and_predict(image_data,model):
 
 # Streamlit app
 st.title("Mood Detection")
+model = load_model()
 
 file = st.file_uploader("Choose a photo from your computer", type=["jpg", "png"])
 
