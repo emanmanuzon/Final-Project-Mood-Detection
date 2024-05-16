@@ -1,23 +1,26 @@
 import streamlit as st
-import tensorflow as tf
-from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
-import cv2
-import av 
+from streamlit_webrtc import VideoTransformer, webrtc_streamer
 
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-
-class VideoTransformer(VideoTransformerBase):
+# Define a custom video transformer to display the video feed
+class VideoTransformerBase(VideoTransformer):
     def transform(self, frame):
-        img = frame.to_ndarray(format="bgr24")
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        faces = face_cascade.detectMultiScale(gray, 1.1, 4)
-        for (x, y, w, h) in faces:
-            cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
-            # You can pass the detected faces to your model for mood detection here
-        return img
+        return frame
 
-st.write("""
-# Weather Detection System"""
+# Title of the app
+st.title("Streamlit Camera Feed")
+
+# Define the WebRTC streamer
+webrtc_ctx = webrtc_streamer(
+    key="example",
+    video_transformer_factory=VideoTransformerBase,
+    async_transform=True,
 )
 
-webrtc_streamer(key="example", video_transformer_factory=VideoTransformer)
+# Display the video feed
+if webrtc_ctx.video_transformer:
+    webrtc_ctx.video_transformer.video_sink.set_layout("contain")
+    st.video(webrtc_ctx)
+else:
+    st.warning("No video stream found.")
+
+# Optional: Add any additional Streamlit components or UI elements
