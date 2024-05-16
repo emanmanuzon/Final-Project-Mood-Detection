@@ -7,7 +7,7 @@ from PIL import Image, ImageOps
 @st.cache_data(experimental_allow_widgets=True)
 def load_model():
     print("Loading model...")
-    model = tf.keras.models.load_model('moodmodel.h5')
+    model = tf.keras.models.load_model('CNN_Model_7.h5')
     print("Model loaded successfully!")
     return model
 
@@ -35,7 +35,7 @@ def import_and_predict(image_data, model):
     # Convert NumPy arra
     image = Image.fromarray(image_data)
     
-    image = img.resize((48,48))
+    image = img.resize((100,100))
     img_array = img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
     
