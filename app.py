@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 from PIL import Image, ImageOps 
 
-
+@st.cache_data(experimental_allow_widgets=True)
 def load_model():
     print("Loading model...")
     model = tf.keras.models.load_model('moodmodel.h5')
