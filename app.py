@@ -3,6 +3,7 @@ import tensorflow as tf
 import cv2
 import numpy as np
 from PIL import Image, ImageOps 
+from keras.preprocessing.image import img_to_array
 
 @st.cache_data(experimental_allow_widgets=True)
 def load_model():
