@@ -17,3 +17,5 @@ model=load_model()
 st.write("""
 # Mood Detection"""
 )
+
+webrtc_ctx = webrtc_streamer(key="example", video_transformer_factory=VideoTransformer)
