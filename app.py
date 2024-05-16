@@ -32,21 +32,15 @@ def detect_faces(image):
     return image, len(faces), rois
 
 def import_and_predict(image_data, model):
-    # Convert NumPy array to PIL image
+    # Convert NumPy arra
     image = Image.fromarray(image_data)
     
-    # Resize the image
-    size = (48, 48)
-    image_resized = ImageOps.fit(image, size)
-    
-    # Convert the resized image back to a NumPy array
-    img = np.asarray(image_resized)
-    
-    # Add a new axis to match the model's input shape
-    img_reshape = img[np.newaxis, ...]
+    image = img.resize((48,48))
+    img_array = img_to_array(img)
+    img_array = np.expand_dims(img_array, axis=0)
     
     # Make prediction
-    prediction = model.predict(img_reshape)
+    prediction = model.predict(img_array)
     
     return prediction
 
