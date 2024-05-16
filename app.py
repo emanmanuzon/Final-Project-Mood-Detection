@@ -1,6 +1,5 @@
 import streamlit as st
 import cv2
-import numpy as np
 
 # Function to detect faces in an image
 def detect_faces(image):
@@ -29,10 +28,10 @@ if file is not None:
     image = cv2.imdecode(np.fromstring(file.read(), np.uint8), 1)
 
     # Display the original image
-    st.image(image, caption='Original Image', use_column_width=True)
+    st.image(image, caption='Original Image')
 
     # Detect faces in the image
     image_with_faces, num_faces = detect_faces(image)
 
     # Display the image with detected faces
-    st.image(image_with_faces, caption=f'Image with {num_faces} face(s) detected', use_column_width=True)
+    st.image(image_with_faces, caption=f'Image with {num_faces} face(s) detected')
