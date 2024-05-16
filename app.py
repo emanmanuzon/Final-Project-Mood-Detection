@@ -3,9 +3,12 @@ import tensorflow as tf
 import cv2
 import numpy as np
 
+
 def load_model():
-  model=tf.keras.models.load_model('moodmodel.h5')
-  return model
+    print("Loading model...")
+    model = tf.keras.models.load_model('moodmodel.h5')
+    print("Model loaded successfully!")
+    return model
 model=load_model()
 
 # Function to detect faces in an image
