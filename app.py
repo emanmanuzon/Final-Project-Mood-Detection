@@ -4,3 +4,5 @@ import streamlit as st
 import cv2
 
 st.title("Mood Detection")
+
+webrtc_streamer(key="sample")
