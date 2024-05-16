@@ -63,7 +63,7 @@ if file is not None:
 
     for i, roi in enumerate(rois):
         # Make prediction for the ROI
-        prediction = import_and_predict(Image.fromarray(cv2.cvtColor(roi, cv2.COLOR_BGR2RGB)), model)
+        prediction = import_and_predict(roi, model)
 
 
 
