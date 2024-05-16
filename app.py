@@ -2,12 +2,14 @@ import streamlit as st
 import tensorflow as tf
 import cv2
 import numpy as np
+from PIL import Image, ImageOps 
 
 
 def load_model():
+    print("Loading model...")
     model = tf.keras.models.load_model('moodmodel.h5')
+    print("Model loaded successfully!")
     return model
-model=load_model()
 
 # Function to detect faces in an image
 def detect_faces(image):
