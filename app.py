@@ -1,26 +1,22 @@
-import streamlit as st
-from streamlit_webrtc import VideoTransformer, webrtc_streamer
+from streamlit_webrtc import webrtc_streamer, RTCConfiguration
+import av
+import cv2
 
-# Define a custom video transformer to display the video feed
-class VideoTransformerBase(VideoTransformer):
-    def transform(self, frame):
-        return frame
+cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 
-# Title of the app
-st.title("Streamlit Camera Feed")
+class VideoProcessor:
+	def recv(self, frame):
+		frm = frame.to_ndarray(format="bgr24")
 
-# Define the WebRTC streamer
-webrtc_ctx = webrtc_streamer(
-    key="example",
-    video_transformer_factory=VideoTransformerBase,
-    async_transform=True,
-)
+		faces = cascade.detectMultiScale(cv2.cvtColor(frm, cv2.COLOR_BGR2GRAY), 1.1, 3)
 
-# Display the video feed
-if webrtc_ctx.video_transformer:
-    webrtc_ctx.video_transformer.video_sink.set_layout("contain")
-    st.video(webrtc_ctx)
-else:
-    st.warning("No video stream found.")
+		for x,y,w,h in faces:
+			cv2.rectangle(frm, (x,y), (x+w, y+h), (0,255,0), 3)
 
-# Optional: Add any additional Streamlit components or UI elements
+		return av.VideoFrame.from_ndarray(frm, format='bgr24')
+
+webrtc_streamer(key="key", video_processor_factory=VideoProcessor,
+				rtc_configuration=RTCConfiguration(
+					{"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
+					)
+	)
