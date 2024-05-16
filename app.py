@@ -25,5 +25,3 @@ model=load_model()
 st.write("""
 # Mood Detection"""
 )
-
-webrtc_streamer(key='key', video_processor_factory=VideoTransformer, rtc_configuration=RTCConfiguration({"iceServers":[{"urls": ["stun:stun.l.google.com:19302"]}]}))
