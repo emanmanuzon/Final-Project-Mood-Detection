@@ -35,7 +35,7 @@ def import_and_predict(image_data, model):
     # Convert NumPy arra
     image = Image.fromarray(image_data)
     
-    image = img.resize((100,100))
+    image = image.resize((100,100))
     img_array = img_to_array(image)
     img_array = np.expand_dims(img_array, axis=0)
     
