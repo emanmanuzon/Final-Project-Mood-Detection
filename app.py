@@ -5,9 +5,7 @@ import numpy as np
 
 
 def load_model():
-    print("Loading model...")
     model = tf.keras.models.load_model('moodmodel.h5')
-    print("Model loaded successfully!")
     return model
 model=load_model()
 
