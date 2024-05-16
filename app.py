@@ -29,6 +29,14 @@ def detect_faces(image):
     
     return image, len(faces), rois
 
+def import_and_predict(image_data,model):
+    size=(48,48)
+    image=ImageOps.fit(image_data,size)
+    img=np.asarray(image)
+    img_reshape=img[np.newaxis,...]
+    prediction=model.predict(img_reshape)
+    return prediction
+
 # Streamlit app
 st.title("Mood Detection")
 
@@ -50,3 +58,10 @@ if file is not None:
     # Display the ROIs of the detected faces
     for i, roi in enumerate(rois):
         st.image(roi, channels="BGR", caption=f'Region of Interest {i+1}')
+
+    for i, roi in enumerate(rois):
+        # Make prediction for the ROI
+        prediction = import_and_predict(Image.fromarray(cv2.cvtColor(roi, cv2.COLOR_BGR2RGB)), model)
+
+
+
