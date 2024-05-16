@@ -5,4 +5,5 @@ import cv2
 
 st.title("Mood Detection")
 
-webrtc_streamer(key="sample")
+file=st.file_uploader("Choose weather photo from computer",type=["jpg","png"])
+
