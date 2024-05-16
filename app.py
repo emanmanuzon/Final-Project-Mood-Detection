@@ -2,6 +2,11 @@ import streamlit as st
 import cv2
 import numpy as np
 
+def load_model():
+  model=tf.keras.models.load_model('moodmodel.h5')
+  return model
+model=load_model()
+
 # Function to detect faces in an image
 def detect_faces(image):
     # Load the pre-trained face detector
