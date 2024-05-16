@@ -8,8 +8,7 @@ class VideoTransformer(VideoTransformerBase):
     def transform(self, frame):
         return frame
 
-face_cascade = cv2.CascadeClassifier()
-
+face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 def load_model():
   model=tf.keras.models.load_model('CNN_Model_7.h5')
