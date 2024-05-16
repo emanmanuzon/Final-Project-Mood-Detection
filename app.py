@@ -1,7 +1,16 @@
 import streamlit as st
 import tensorflow as tf
+from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
 
 @st.cache_data(experimental_allow_widgets=True)
+
+class VideoTransformer(VideoTransformerBase):
+    def transform(self, frame):
+        return frame
+
+face_cascade = cv2.CascadeClassifier()
+
+
 def load_model():
   model=tf.keras.models.load_model('CNN_Model_7.h5')
   return model
