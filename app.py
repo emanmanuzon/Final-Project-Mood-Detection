@@ -10,7 +10,7 @@ face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 class VideoTransformer:
     def transform(self, frame):
         img = frame.to_ndarray(format="bgr24")
-        faces = cascase.detectMultiscale(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY), 1.1,3)
+        faces = face_cascade.detectMultiscale(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY), 1.1,3)
 
         for (x, y, w, h) in faces:
             cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
