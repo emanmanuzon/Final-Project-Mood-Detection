@@ -31,12 +31,23 @@ def detect_faces(image):
     
     return image, len(faces), rois
 
-def import_and_predict(image_data,model):
-    size=(48,48)
-    image=ImageOps.fit(image_data,size)
-    img=np.asarray(image)
-    img_reshape=img[np.newaxis,...]
-    prediction=model.predict(img_reshape)
+def import_and_predict(image_data, model):
+    # Convert NumPy array to PIL image
+    image = Image.fromarray(image_data)
+    
+    # Resize the image
+    size = (100, 100)
+    image_resized = ImageOps.fit(image, size)
+    
+    # Convert the resized image back to a NumPy array
+    img = np.asarray(image_resized)
+    
+    # Add a new axis to match the model's input shape
+    img_reshape = img[np.newaxis, ...]
+    
+    # Make prediction
+    prediction = model.predict(img_reshape)
+    
     return prediction
 
 # Streamlit app
