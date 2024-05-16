@@ -36,7 +36,7 @@ def import_and_predict(image_data, model):
     image = Image.fromarray(image_data)
     
     # Resize the image
-    size = (100, 100)
+    size = (48, 48)
     image_resized = ImageOps.fit(image, size)
     
     # Convert the resized image back to a NumPy array
