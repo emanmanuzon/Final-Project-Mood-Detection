@@ -13,11 +13,14 @@ def detect_faces(image):
     # Detect faces in the grayscale image
     faces = face_cascade.detectMultiScale(gray_image, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
     
-    # Draw rectangles around the detected faces
+    # Draw rectangles around the detected faces and extract ROIs
+    rois = []
     for (x, y, w, h) in faces:
         cv2.rectangle(image, (x, y), (x+w, y+h), (255, 0, 0), 2)
+        roi = image[y:y+h, x:x+w]
+        rois.append(roi)
     
-    return image, len(faces)
+    return image, len(faces), rois
 
 # Streamlit app
 st.title("Mood Detection")
@@ -32,7 +35,11 @@ if file is not None:
     st.image(image, channels="BGR", caption='Original Image')
 
     # Detect faces in the image
-    image_with_faces, num_faces = detect_faces(image)
+    image_with_faces, num_faces, rois = detect_faces(image)
 
     # Display the image with detected faces
     st.image(image_with_faces, channels="BGR", caption=f'Image with {num_faces} face(s) detected')
+
+    # Display the ROIs of the detected faces
+    for i, roi in enumerate(rois):
+        st.image(roi, channels="BGR", caption=f'Region of Interest {i+1}')
