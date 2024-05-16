@@ -36,7 +36,7 @@ def import_and_predict(image_data, model):
     image = Image.fromarray(image_data)
     
     image = img.resize((100,100))
-    img_array = img_to_array(img)
+    img_array = img_to_array(image)
     img_array = np.expand_dims(img_array, axis=0)
     
     # Make prediction
