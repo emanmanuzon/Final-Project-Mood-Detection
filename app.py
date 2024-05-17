@@ -42,7 +42,7 @@ def import_and_predict(image_data, classifier):
     # Convert NumPy arra
     image = Image.fromarray(image_data)
     
-    image = image.resize((100,100))
+    image = image.resize((48,48))
     img_array = img_to_array(image)
     img_array = np.expand_dims(img_array, axis=0)
     
