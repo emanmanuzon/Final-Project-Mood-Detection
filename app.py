@@ -10,7 +10,7 @@ from keras.preprocessing.image import img_to_array
 
 mood_dict = {0:'angry', 1 :'happy', 2: 'neutral', 3:'sad'}
 # load json and create model
-json_file = open('mooodmodel2.json', 'r')
+json_file = open('moodmodel2.json', 'r')
 loaded_model_json = json_file.read()
 json_file.close()
 classifier = model_from_json(loaded_model_json)
