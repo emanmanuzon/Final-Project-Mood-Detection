@@ -3,14 +3,20 @@ import tensorflow as tf
 import cv2
 import numpy as np
 from PIL import Image, ImageOps 
+from tensorflow import keras
+from keras.models import model_from_json
 from keras.preprocessing.image import img_to_array
 
-@st.cache_data(experimental_allow_widgets=True)
-def load_model():
-    print("Loading model...")
-    model = tf.keras.models.load_model('CNN_Model_7.h5')
-    print("Model loaded successfully!")
-    return model
+
+mood_dict = {0:'angry', 1 :'happy', 2: 'neutral', 3:'sad'}
+# load json and create model
+json_file = open('mooodmodel2.json', 'r')
+loaded_model_json = json_file.read()
+json_file.close()
+classifier = model_from_json(loaded_model_json)
+
+# load weights into new model
+classifier.load_weights("moodmodel2.h5")
 
 # Function to detect faces in an image
 def detect_faces(image):
@@ -32,7 +38,7 @@ def detect_faces(image):
     
     return image, len(faces), rois
 
-def import_and_predict(image_data, model):
+def import_and_predict(image_data, classifier):
     # Convert NumPy arra
     image = Image.fromarray(image_data)
     
@@ -70,7 +76,7 @@ if file is not None:
 
     for i, roi in enumerate(rois):
         # Make prediction for the ROI
-        prediction = import_and_predict(roi, model)
+        prediction = import_and_predict(roi, classifier)
 
 
 
