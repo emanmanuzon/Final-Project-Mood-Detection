@@ -47,7 +47,7 @@ def import_and_predict(image_data, classifier):
     img_array = np.expand_dims(img_array, axis=0)
     
     # Make prediction
-    prediction = model.predict(img_array)
+    prediction = classifier.predict(img_array)
     
     return prediction
 
